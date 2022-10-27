@@ -1,5 +1,5 @@
 import React,{ useState, useEffect} from "react";
-import courseList from "./Components/courseList";
+import CourseList from "./Components/courseList.js";
 
 function App(){
 
@@ -9,7 +9,8 @@ function App(){
         const getCourse = () => {
             fetch('http://localhost:3000/materias/todas')
             .then(res => res.json())
-            .then(res => console.log(res))
+            .then(res => setcourses(res))
+            
         }
         getCourse()
     }, [])
@@ -18,8 +19,7 @@ function App(){
         <div className="container">
             <div className="row">
                 <h2 style={{textAling: 'center'}}>LISTA DE CURSOS</h2>
-                <courseList courses={courses}/>
-                
+                <CourseList courses={courses}/>
             </div>
         </div>
     );

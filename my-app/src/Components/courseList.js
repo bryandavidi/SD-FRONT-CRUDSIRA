@@ -1,6 +1,6 @@
 import React from "react";
 
-const courseList = ({course}) =>{
+function courseList({courses}) {
     return(
         <table className="table">
             <thead>
@@ -14,14 +14,14 @@ const courseList = ({course}) =>{
                 </tr>
             </thead>
             <tbody>
-                {course.map( course =>(
+                {courses.map( course =>(
                     <tr key = {course.id_materia}>
                     <th>{course.id_materia}</th>
                     <th>{course.codigo_materia}</th>
                     <th>{course.nombre_materia}</th>
                     <th>{course.creditos_materia}</th>
                     <th>{course.cupos}</th>
-                    <th>{course.estado_activo}</th>
+                    <th>{course.estado_activo.toString()}</th>
                     </tr>
                 ))}
             </tbody>
