@@ -1,11 +1,14 @@
 import React,{ useState, useEffect} from "react";
 import CourseList from "./Components/courseList.js";
 import InscriptionList from "./Components/inscriptionList.js";
+import StudentList from "./Components/studentList.js";
 
 function App(){
 
     const [courses,setcourses] = useState([])
     const [inscriptions,setinscription] = useState([])
+    const [students,setstudent] = useState([])
+
 
 
     useEffect(() =>{
@@ -24,6 +27,14 @@ function App(){
             
         }
         getinscription()
+
+        const getstudent = () => {
+            fetch('http://localhost:3000/estudiantes/todos')
+            .then(res => res.json())
+            .then(res => setstudent(res))
+            
+        }
+        getstudent()
     }, [])
 
     return(
@@ -33,6 +44,9 @@ function App(){
                 <CourseList courses={courses}/>
                 <h2 style={{textAling: 'center'}}>LISTA DE INSCRIPCIONES</h2>
                 <InscriptionList inscriptions={inscriptions}/>
+                <h2 style={{textAling: 'center'}}>LISTA DE ESTUDIANTES</h2>
+                <StudentList students={students}/>
+            
             </div>
         </div>
     );
