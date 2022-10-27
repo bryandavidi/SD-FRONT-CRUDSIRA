@@ -4,6 +4,7 @@ import {Route, Routes } from "react-router-dom";
 // import InscriptionList from "./Components/InscriptionList.js";
 // import StudentList from "./Components/StudentList.js";
 import Login from "./Components/Login.js";
+import NavBarHome from "./layouts/navbar.js";
 
 // const Student = () => {
 //     const [students,setstudent] = useState([])
@@ -62,6 +63,7 @@ function App(){
     return(
         <Routes>
                 <Route path="/login" element ={<Login />}/>
+                <Route path="/home" element ={<NavBarHome />}/>
                 {/* <Route path="/inicio" element ={<Home />}/>
                 <Route path="/estudiantes" element ={<Student />}/>
                 <Route path="/materias" element ={<Course />}/>
