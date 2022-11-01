@@ -6,6 +6,7 @@ import StudentList from "./Components/StudentList.js";
 import Login from "./Components/Login.js";
 import NavBarHome from "./layouts/Navbar.js";
 
+
 const Student = () => {
     const [students,setstudent] = useState([])
 
@@ -67,7 +68,7 @@ function App(){
                     <Route path = "materias" element ={<Course />}/>
                     <Route path = "inscripciones" element ={<Inscription />}/>
                 </Route>
-                <Route path = "login" element ={<Login />}/>
+                <Route path = "/" element ={<Login />}/>
         </Routes>      
     );
 }
