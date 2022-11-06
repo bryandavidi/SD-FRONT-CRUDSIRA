@@ -3,12 +3,16 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import  Form  from "react-bootstrap/Form";
 import axios from 'axios';
+import { Cookies } from 'react-cookie'
 
 import '../css/Login.css';
+
 
 export const Login = () =>{
 
     const [body, setBody] = useState({usuario : '', contrasena:''})
+    const [token, seToken] = useState('')
+
     const inputChange = ({target}) =>{
         const {name, value} = target
         setBody({
@@ -17,10 +21,19 @@ export const Login = () =>{
         })
     }
     const onSubmit = () => {
-        console.log(body)
         axios.post('http://localhost:3000/auth/login',body)
-        .then(data => console.log(data.data.token))
+        .then(data => seToken(data.data.token))
         .catch(response=> console.log(response));
+        validate()
+    }
+
+    function validate(){
+        if(token){
+            const cookies = new Cookies();
+            cookies.set('token',token,{path:'/'});
+            window.location.href="./menu";
+        }
+
     }
 
     return(

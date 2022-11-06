@@ -4,6 +4,13 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Outlet, Link } from 'react-router-dom';
+import { Cookies } from "react-cookie";
+
+const cookies = new Cookies();
+
+function removeCookie(name){
+    cookies.remove(name)
+}
 
 function NavBarHome (){
     return(
@@ -29,7 +36,7 @@ function NavBarHome (){
                     </NavDropdown>
                 </Nav>
                 <Nav>
-                    <Nav.Link as={Link} to='/login'>Cerrar sesión</Nav.Link>
+                    <Nav.Link as={Link} to='/' onClick={removeCookie('token')}>Cerrar sesión</Nav.Link>
                 </Nav>
                 </Navbar.Collapse>
             </Container>

@@ -5,53 +5,57 @@ import InscriptionList from "./Components/InscriptionList.js";
 import StudentList from "./Components/StudentList.js";
 import Login from "./Components/Login.js";
 import NavBarHome from "./layouts/Navbar.js";
+import { Cookies } from "react-cookie";
+import axios from 'axios';
 
+
+const cookies = new Cookies();
+
+const config = {
+    headers:{
+        Authorization: cookies.get('token')
+    }
+}
 
 const Student = () => {
-    const [students,setstudent] = useState([])
+    const [students,setStudent] = useState([])
 
-    useEffect(()=>{
-        const getstudent = () => {
-            fetch('http://localhost:3000/estudiantes/todos')
-            .then(res => res.json())
-            .then(res => setstudent(res))
+    useEffect( () => {
+        const getstudent = async() => {
+            const response= await axios.get('http://localhost:3000/estudiantes/todos',config)
+            setStudent(response.data)
+            console.log(response.data)
         }
         getstudent()
     },[]);
-
-    return (
-    <StudentList students={students}/>
-    );
+    return ( < StudentList students = { students } /> );
 }
 
 const  Inscription = () => {
-    const [inscriptions,setinscription] = useState([])
+    const [inscriptions,setInscription] = useState([])
 
     useEffect(()=>{
-        const getinscription = () => {
-            fetch('http://localhost:3000/inscripciones/todas')
-            .then(res => res.json())
-            .then(res => setinscription(res))
-            
+        const getinscription = async() => {
+            const response = await axios.get('http://localhost:3000/inscripciones/todas',config)
+            setInscription(response.data)
+            console.log(response.data)
         }
         getinscription()
     },[]);
 
-    return(
-        <InscriptionList inscriptions={inscriptions}/>
-    );
+    return( < InscriptionList inscriptions = { inscriptions } /> );
 }
 
 const Course = () => {
-    const [courses,setcourses] = useState([])
+    const [courses,setCourses] = useState([])
 
     useEffect(()=>{
-        const getCourse = () => {
-            fetch('http://localhost:3000/materias/todas')
-            .then(res => res.json())
-            .then(res => setcourses(res))
-            
+        const getCourse = async() => {
+            const response = await axios.get('http://localhost:3000/materias/todas',config)
+            setCourses(response.data)
+            console.log(response.data)
         }
+            
         getCourse()
     },[]);
     
