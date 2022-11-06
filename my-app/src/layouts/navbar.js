@@ -22,17 +22,17 @@ function NavBarHome (){
                 <Nav className="me-auto">
                     <NavDropdown title="Estudiantes" id="collasible-nav-dropdown">
                     <NavDropdown.Item as={Link} to='estudiantes' >Mostrar estudiantes</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/1.2">Crear estudiante</NavDropdown.Item>
+                    <NavDropdown.Item as = {Link} to="estudiantes/crear">Crear estudiante</NavDropdown.Item>
                     </NavDropdown>
 
                     <NavDropdown title="Materias" id="collasible-nav-dropdown">
                     <NavDropdown.Item as={Link} to = 'materias'>Mostrar materias</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/2.2">Crear materia</NavDropdown.Item>
+                    <NavDropdown.Item as = {Link} to="materias/crear">Crear materia</NavDropdown.Item>
                     </NavDropdown>
 
                     <NavDropdown title="Inscripciones" id="collasible-nav-dropdown">
                     <NavDropdown.Item as={Link} to='inscripciones'>Mostrar Inscripciones</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.2">Generar Inscripcion</NavDropdown.Item>
+                    <NavDropdown.Item as = {Link} to="inscripciones/crear">Crear Inscripcion</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
                 <Nav>
