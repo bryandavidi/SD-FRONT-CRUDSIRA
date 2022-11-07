@@ -1,13 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/esm/Container";
+import Button from 'react-bootstrap/Button';
+import axios from 'axios';
+
+import { Cookies } from "react-cookie";
+
+const cookies = new Cookies();
+
+const config = {
+    headers:{
+        Authorization: cookies.get('token')
+    }
+}
 
 
-function studentList({students}){
-    const [search, setSearch] = useState("")
 
+function studentList(){
+    
+    const [students,setStudent] = useState([])
+    const [search, setSearch] = useState("");
+
+    useEffect( () => {
+        const getstudent = async() => {
+            const response= await axios.get('http://localhost:3000/estudiantes/todos',config)
+            setStudent(response.data)
+        }
+        getstudent()
+    },[]);
+    
     const searcher = (e) =>{
         setSearch(e.target.value)
-        console.log(e.target.value)
     }
 
     let results = []
@@ -20,6 +42,18 @@ function studentList({students}){
         )
     } 
 
+    const deleteStudent = async (id) => {
+        var option = window.confirm('Esta seguro que desea eliminar el estudiante seleccionado');
+        if(option){
+            setStudent(results.filter( data=> data.id_estudiante !== id))
+            await axios.delete('http://localhost:3000/estudiantes/eliminar',{headers: config.headers , data :{id_estudiante : id , container: 'imagenesira'}})
+                .then(() => {
+                alert("Estudiante eliminado!");
+              });
+        }
+        
+    }
+    
     return (
         <Container>
             <input  value = {search} onChange={searcher} type = 'text' placeholder="Buscar" className="form-control"/>
@@ -45,6 +79,10 @@ function studentList({students}){
                         <th>{student.nombres}</th>
                         <th>{student.apellidos}</th>
                         <th>{student.estado}</th>
+                        <td>
+                        <Button className="btn btn-warning mx-1">Editar</Button>
+                        <Button className= "btn btn-danger"  onClick={() => deleteStudent(student.id_estudiante)}>Eliminar</Button>
+                        </td>
                     </tr>
                 ))}
             </tbody>

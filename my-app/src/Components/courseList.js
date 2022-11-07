@@ -1,13 +1,32 @@
-import React , { useState } from "react";
+import React , { useState,  useEffect } from "react";
 import Container from "react-bootstrap/esm/Container";
+import Button from 'react-bootstrap/Button';
+import axios from 'axios';
 
+import { Cookies } from "react-cookie";
 
-function courseList({courses}) {
+const cookies = new Cookies();
+
+const config = {
+    headers:{
+        Authorization: cookies.get('token')
+    }
+}
+
+function courseList() {
+    const [courses,setCourses] = useState([])
     const [search, setSearch] = useState("")
+
+    useEffect(()=>{
+        const getCourse = async() => {
+            const response = await axios.get('http://localhost:3000/materias/todas',config)
+            setCourses(response.data)
+        }
+        getCourse()
+    },[]);
 
     const searcher = (e) =>{
         setSearch(e.target.value)
-        console.log(e.target.value)
     }
 
     let results = []
@@ -19,6 +38,18 @@ function courseList({courses}) {
             data.codigo_materia.toLowerCase().includes(search.toLocaleLowerCase())
         )
     } 
+
+    const deleteCourse = async (id) => {
+        var option = window.confirm('Esta seguro que desea eliminar la materia seleccionada');
+        if(option){
+            setCourses(results.filter( data=> data.id_materia !== id))
+            await axios.delete('http://localhost:3000/materias/eliminar',{headers: config.headers , data :{id_materia : id}})
+                .then(() => {
+                alert("Materia eliminada!");
+              });
+        }
+        
+    }
     return(
         <Container>
             <input value = {search} onChange={searcher} type = 'text' placeholder="Buscar" className="form-control"/>
@@ -42,6 +73,10 @@ function courseList({courses}) {
                         <th>{course.creditos_materia}</th>
                         <th>{course.cupos}</th>
                         <th>{course.estado_activo.toString()}</th>
+                        <td>
+                        <Button className="btn btn-warning mx-1">Editar</Button>
+                        <Button className= "btn btn-danger"  onClick={() => deleteCourse(course.id_materia)}>Eliminar</Button>
+                        </td>
                         </tr>
                     ))}
                 </tbody>
