@@ -7,8 +7,8 @@ import InscriptionList from "./Components/InscriptionList.js";
 import InscriptionModals from "./Components/InscriptionModals.js";
 import StudentList from "./Components/StudentList.js";
 import StudentModals from "./Components/StudentModals.js";
-
 import Login from "./Components/Login.js";
+
 import NavBarHome from "./layouts/Navbar.js";
  
 function App(){
@@ -21,7 +21,6 @@ function App(){
                     <Route path = "materias/crear" element ={<CourseModals/>}/>
                     <Route path = "inscripciones" element ={<InscriptionList />}/>
                     <Route path = "inscripciones/crear" element ={<InscriptionModals/>}/>
-
                 </Route>
                 <Route path = "/" element ={<Login />}/>
         </Routes>      

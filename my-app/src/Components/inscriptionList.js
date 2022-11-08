@@ -69,7 +69,6 @@ function inscriptionList() {
                                 <th>{inscription.id_materia}</th>
                                 <th>{inscription.fecha_inscripcion}</th>
                                 <td>
-                        <Button className="btn btn-warning mx-1">Editar</Button>
                         <Button className= "btn btn-danger"  onClick={() => deleteInscription(inscription.id_estudiante,inscription.id_materia )}>Eliminar</Button>
                         </td>
                             </tr>

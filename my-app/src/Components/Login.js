@@ -34,7 +34,6 @@ export const Login = () =>{
             cookies.set('token',token,{path:'/'});
             window.location.href="./menu";
         }
-
     }
 
     return(
