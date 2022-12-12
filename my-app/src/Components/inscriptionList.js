@@ -18,7 +18,7 @@ function inscriptionList() {
 
     useEffect(()=>{
         const getinscription = async() => {
-            const response = await axios.get('http://localhost:3000/inscripciones/todas',config)
+            const response = await axios.get('http://3.93.3.204/inscripciones/todas',config)
             setInscription(response.data)
         }
         getinscription()
@@ -43,7 +43,7 @@ function inscriptionList() {
         var option = window.confirm('Esta seguro que desea eliminar la inscripcion seleccionada');
         if(option){
             setInscription(results.filter( data=> data.id_materia !== id_materia && data.id_estudiante!== id_estudiante))
-            await axios.delete('http://localhost:3000/inscripciones/eliminar',{headers: config.headers , data :{id_estudiante: id_estudiante, id_materia : id_materia}})
+            await axios.delete('http://3.93.3.204/inscripciones/eliminar',{headers: config.headers , data :{id_estudiante: id_estudiante, id_materia : id_materia}})
                 .then(() => {
                 alert("Inscripcion eliminada!");
               });

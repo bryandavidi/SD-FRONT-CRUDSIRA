@@ -41,7 +41,7 @@ function CourseModals() {
 
   const course = () =>{
     console.log(data)
-    axios.post('http://localhost:3000/materias/crear', data ,config).then(() => {
+    axios.post('http://3.93.3.204/materias/crear', data ,config).then(() => {
       alert("Materia Creada!");
     });
     setShow(false)

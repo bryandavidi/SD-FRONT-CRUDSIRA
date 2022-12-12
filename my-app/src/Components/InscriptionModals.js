@@ -25,12 +25,12 @@ function InscriptionModals() {
 
   useEffect( () => {
     const getstudent = async() => {
-        const response= await axios.get('http://localhost:3000/estudiantes/todos',config)
+        const response= await axios.get('http://3.93.3.204/estudiantes/todos',config)
         setStudents(response.data)
     }
 
     const getCourse = async() => {
-      const response = await axios.get('http://localhost:3000/materias/todas',config)
+      const response = await axios.get('http://3.93.3.204/materias/todas',config)
       setCourses(response.data)
   }
     getCourse()
@@ -42,7 +42,7 @@ function InscriptionModals() {
   }
 
   const inscription = () =>{
-    axios.post('http://localhost:3000/inscripciones/crear', data ,config).then(() => {
+    axios.post('http://3.93.3.2040/inscripciones/crear', data ,config).then(() => {
       alert("Inscripcion Creada!");
     });
     setShow(false)

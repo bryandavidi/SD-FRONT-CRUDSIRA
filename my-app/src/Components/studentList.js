@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/esm/Container";
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
+import Modal from "./ImageModals";
 
 import { Cookies } from "react-cookie";
 
@@ -16,8 +17,17 @@ const config = {
 
 
 function studentList(){
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false)
     
-    const [students,setStudent] = useState([])
+    const handleShow = () => setShow(true);
+    
+    const [url, setUrl] =  useState([]);
+    
+    const [students,setStudent] = useState([]);
+    
     const [search, setSearch] = useState("");
 
     useEffect( () => {
@@ -53,9 +63,15 @@ function studentList(){
         }
         
     }
+
+    function modal( url ){
+        handleShow();
+        setUrl(url);
+    }
     
     return (
-        <Container>
+        <>
+        <Container className="container-fluid">
             <input  value = {search} onChange={searcher} type = 'text' placeholder="Buscar" className="form-control"/>
             <table className="table">
             <thead>
@@ -80,6 +96,7 @@ function studentList(){
                         <th>{student.apellidos}</th>
                         <th>{student.estado}</th>
                         <td>
+                        <Button className="btn btn-info" onClick={()=> modal(student.imagen) }>Imagen</Button>
                         <Button className="btn btn-warning mx-1">Editar</Button>
                         <Button className= "btn btn-danger"  onClick={() => deleteStudent(student.id_estudiante)}>Eliminar</Button>
                         </td>
@@ -88,6 +105,8 @@ function studentList(){
             </tbody>
         </table>
     </Container>
+        <Modal show = {show} handleClose={handleClose} url = {url}/>
+    </>
     );
 }
 

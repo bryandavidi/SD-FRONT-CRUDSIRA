@@ -45,8 +45,12 @@ export const Login = () =>{
                 />
 
                 <Form.Group className="mb-1">
-                    <Form.Control type="text" size="lg" placeholder="usuario" autoComplete="usuario" name="usuario" value={body.usuario} onChange={inputChange}/>
+                    <Form.Control type="text" size="lg" placeholder="usuario" autoComplete="usuario" name="usuario" value={body.usuario} onChange={inputChange} required={true} />
+                    
                 </Form.Group>
+                <div className="invalid-feedback">
+                        Ingrese un usuario
+                    </div>
 
                 <Form.Group className="mb-3">
                 <Form.Control type="password" size="lg" placeholder="contrasena" autoComplete="contrasena" name="contrasena" value={body.contrasena} onChange={inputChange} />
